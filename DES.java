@@ -410,13 +410,24 @@ public class DES {
 	
 	public static void main(String[] args){
 		String test = "Hello World";
-		String key = "TestKey";
-		//byte[] cipherText = encrypt(test.getBytes(), key.getBytes());
-		//System.out.println(cipherText);
-		System.out.println("---------------------------------------------------------");
-		byte[] plainText = decrypt(test.getBytes(), key.getBytes());
-		System.out.println(plainText);
-		System.out.println("---------------------------------------------------------");
+		/*
+		* Note that key should be more than (or equal to) 64-bits i.e. more than (or equal to) 8 charachters.
+		*/
+		String key = "TestKeyForDES"; 
+		byte[] cipherText = encrypt(test.getBytes(), key.getBytes());
+		try {
+			System.out.write(cipherText);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("\n---------------------------------------------------------");
+		byte[] plainText = decrypt(cipherText, key.getBytes());
+		try {
+			System.out.write(plainText);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("\n---------------------------------------------------------");
 	}
 }
 
