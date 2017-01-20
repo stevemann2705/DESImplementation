@@ -429,6 +429,12 @@ public class DESInterOp {
 	//[30, 98, -128, 112, 83, -79, -128, -80, -18, 126, 33, 77, -54, 126, -68, -108]
 	
 	public static void main(String[] args){
+		
+		/* File Path Constants */
+		String rawFile = "/home/steve/workspace/DESImplementation/src/com/steve/crypto/despackage/Raw.txt";
+		String encryptedFile = "/home/steve/workspace/DESImplementation/src/com/steve/crypto/despackage/Encrypted.txt";
+		String decryptedFile = "/home/steve/workspace/DESImplementation/src/com/steve/crypto/despackage/Decrypted.txt";
+		
 		String test = "Hello World";
 		/*
 		* Note that key should be more than (or equal to) 64-bits i.e. more than (or equal to) 8 charachters.
@@ -461,8 +467,8 @@ public class DESInterOp {
 		if(einput == 1){
 			try {
 	        	System.out.println("Encrypting using library....");
-	        	FileInputStream fis1 = new FileInputStream("/home/steve/workspace/DESImplementation/src/com/steve/crypto/despackage/Raw.txt");
-	            FileOutputStream fos1 = new FileOutputStream("/home/steve/workspace/DESImplementation/src/com/steve/crypto/despackage/Encrypted.txt");
+	        	FileInputStream fis1 = new FileInputStream(rawFile);
+	            FileOutputStream fos1 = new FileOutputStream(encryptedFile);
 				encrypt(key,fis1,fos1);
 				System.out.println("Encryption Successful");
 			} catch (Throwable e) {
@@ -471,7 +477,7 @@ public class DESInterOp {
 			}
 		}
 		else if(einput == 2){
-			Path path = Paths.get("/home/steve/workspace/DESImplementation/src/com/steve/crypto/despackage/Raw.txt");
+			Path path = Paths.get(rawFile);
 			byte[] data = null;
 		    try {
 		    	  System.out.println("Reading file");
@@ -485,7 +491,7 @@ public class DESInterOp {
 		    System.out.println("Encrypting.........");
 		    byte[] encrypted = encrypt(data, key.getBytes());
 		    System.out.println("Encrypted Successfully");
-		    Path wr = Paths.get("/home/steve/workspace/DESImplementation/src/com/steve/crypto/despackage/Encrypted.txt");
+		    Path wr = Paths.get(encryptedFile);
 		    try {
 		    	System.out.println("Writing Encrypted File");
 				Files.write(wr, encrypted);
@@ -503,8 +509,8 @@ public class DESInterOp {
 		if(dinput == 1){
 			try {
 	        	System.out.println("Decrypting using library....");
-	        	FileInputStream fis1 = new FileInputStream("/home/steve/workspace/DESImplementation/src/com/steve/crypto/despackage/Encrypted.txt");
-	            FileOutputStream fos1 = new FileOutputStream("/home/steve/workspace/DESImplementation/src/com/steve/crypto/despackage/Decrypted.txt");
+	        	FileInputStream fis1 = new FileInputStream(encryptedFile);
+	            FileOutputStream fos1 = new FileOutputStream(decryptedFile);
 				decrypt(key,fis1,fos1);
 				System.out.println("Decryption Successful");
 			} catch (Throwable e) {
@@ -513,7 +519,7 @@ public class DESInterOp {
 			}
 		}
 		else if(dinput == 2){
-			Path path1 = Paths.get("/home/steve/workspace/DESImplementation/src/com/steve/crypto/despackage/Encrypted.txt");
+			Path path1 = Paths.get(encryptedFile);
 			byte[] data1 = null;
 		    try {
 		    	  System.out.println("Reading file");
@@ -525,7 +531,7 @@ public class DESInterOp {
 			}
 		      
 		    byte[] decrypted = decrypt(data1, key.getBytes());
-		    Path wr = Paths.get("/home/steve/workspace/DESImplementation/src/com/steve/crypto/despackage/Decrypted.txt");
+		    Path wr = Paths.get(decryptedFile);
 		    try {
 		    	System.out.println("Writing Encrypted File");
 				Files.write(wr, decrypted);
